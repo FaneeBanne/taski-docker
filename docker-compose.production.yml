@@ -19,7 +19,7 @@ services:
   frontend:
     image: fannebanne/taski_frontend  # Качаем с Docker Hub
     env_file: .env
-    command: cp -r /app/build/. /frontend_static/
+    command: sh -c "mkdir -p /frontend_static && cp -r /app/build/. /frontend_static/"
     volumes:
       - static_volume:/frontend_static
   gateway:
@@ -29,3 +29,6 @@ services:
       - static_volume:/staticfiles/
     ports:
       - 8000:80
+    depends_on:
+      - backend
+      - frontend
