@@ -29,8 +29,9 @@ services:
       - static_volume:/staticfiles/
       - /etc/letsencrypt:/etc/letsencrypt:ro
     ports:
-      - 80:80
-      - 443:443
+      - "80:80"
+      - "443:443"
+    privileged: true
     depends_on:
       - backend
       - frontend
